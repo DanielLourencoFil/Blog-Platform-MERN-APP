@@ -1,0 +1,54 @@
+.single-post-wrapper {
+	display: flex;
+	margin: 5rem auto;
+	gap: 6rem;
+}
+.single-post {
+	display: flex;
+	flex-direction: column;
+	flex: 9;
+	gap: 1rem;
+}
+.single-post-img {
+	border-radius: var(--radius-1);
+	height: 300px;
+	width: 100%;
+	object-fit: cover;
+}
+.title-and-edit-btns-wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.single-post-title {
+	font-size: 1.75rem;
+	font-weight: 700;
+}
+.single-post-sub-header {
+	margin-top: 0.5rem;
+	display: flex;
+	justify-content: space-between;
+}
+
+.single-post-author {
+	color: var(--color-alert);
+}
+.single-post-edit-btn {
+	color: var(--color-sucess);
+	margin-right: 1rem;
+	cursor: pointer;
+}
+.single-post-delete-btn {
+	color: var(--color-alert);
+	cursor: pointer;
+}
+.single-post-text {
+	text-align: justify;
+	font-family: var(--font-3);
+	line-height: 1.75;
+}
+.single-post-text::first-letter {
+	margin-left: 1.5rem;
+	font-size: 2rem;
+	font-weight: 700;
+}

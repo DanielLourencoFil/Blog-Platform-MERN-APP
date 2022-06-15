@@ -1,0 +1,59 @@
+.update-wrapper {
+	margin-top: 100px;
+}
+.update-header {
+	display: flex;
+	justify-content: space-between;
+}
+.update-title {
+	color: var(--color-sucess-2);
+	font-size: clamp(1.2rem, 5vw, 1.35rem);
+	text-transform: capitalize;
+	letter-spacing: 0;
+}
+.update-delete-btn {
+	position: absolute;
+	right: 0;
+	color: var(--color-alert);
+	text-transform: capitalize;
+	background-color: transparent;
+	letter-spacing: var(--letter-spacing-1);
+	text-align: right;
+}
+
+.update-form input {
+	border-bottom: 1px dotted var(--color-grey-500);
+	border-radius: 0;
+	padding-top: 0;
+}
+.update-profile-pic-wrapper {
+	margin: 2rem 0 1rem 0;
+}
+
+.pic-input-wrapper {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.update-profile-pic-title {
+	margin-bottom: 0.5rem;
+	font-size: 1rem;
+}
+.profile-upload-btn {
+	font-size: 1.2rem;
+	cursor: pointer;
+}
+.profile-pic {
+	height: 50px;
+	width: 50px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.update-btn {
+	align-self: flex-end;
+
+	margin-top: 1rem;
+	background-color: var(--color-sucess-2);
+}

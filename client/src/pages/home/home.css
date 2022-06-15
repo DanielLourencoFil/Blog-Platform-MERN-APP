@@ -1,0 +1,11 @@
+.main-section-home {
+	display: flex;
+	margin: 5rem auto;
+	gap: 6rem;
+}
+.posts-wrapper {
+	flex: 9;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 4rem;
+}

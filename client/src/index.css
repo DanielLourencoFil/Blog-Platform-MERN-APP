@@ -1,0 +1,156 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;500;600;700&family=Lora:ital,wght@1,400;1,500;1,600;1,700&family=Varela+Round&display=swap");
+:root {
+	--color-light-100: #ffff;
+	--color-grey-300: #aaa;
+	--color-grey-400: #888;
+	--color-grey-500: #444;
+	--color-alert: #ff6347;
+	--color-sucess: #808000;
+	--color-sucess-2: #0f8000;
+	--font-1: "Josefin Sans", sans-serif;
+	--font-2: "Lora", serif;
+	--font-3: "Varela Round", sans-serif;
+	--letter-spacing-1: 1px;
+	--letter-spacing-2: 2px;
+	--radius-1: 5px;
+	--radius-2: 10px;
+	--transition-1: all 0.3s;
+	--transition-2: all 0.5s;
+}
+html {
+	scroll-behavior: smooth;
+}
+body {
+	font-family: var(--font-1);
+	letter-spacing: var(--letter-spacing-1);
+	margin: 0;
+	padding: 0;
+	color: var(--color-grey-500);
+	line-height: 1.5;
+	overflow-x: hidden;
+}
+a {
+	text-decoration: none;
+	color: var(--color-grey-500);
+}
+a:active,
+a:visited {
+	color: var(--color-grey-500);
+}
+button:hover {
+	cursor: pointer;
+}
+ul {
+	padding: 0;
+}
+li {
+	list-style: none;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+	margin: 0;
+	padding: 0;
+	line-height: 1.2;
+}
+button {
+	border-radius: var(--radius-1);
+	cursor: pointer;
+	border: 1px solid transparent;
+	transition: var(--transition-1);
+}
+input {
+	font-family: var(--font-1);
+	letter-spacing: var(--letter-spacing-1);
+	color: var(--color-grey-500);
+	border-radius: var(--radius-1);
+}
+input::placeholder {
+	font-family: inherit;
+	color: var(--color-grey-300);
+}
+label {
+	position: relative;
+	color: inherit;
+	text-transform: capitalize;
+	font-size: 0.925rem;
+}
+.main-section {
+	width: 100vw;
+}
+.section-center {
+	position: relative;
+	width: 90%;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+.page-title {
+	margin-bottom: 2rem;
+	text-transform: capitalize;
+	font-family: var(--font-1);
+}
+/* GENERIC FORM FOR USER LOGIN AN REGISTER */
+.log-form {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	width: 100%;
+	max-width: 400px;
+}
+
+.log-form input {
+	border: 1px solid transparent;
+	padding: 0.35rem;
+	padding-top: 0.65rem;
+	margin-bottom: 0.5rem;
+	font-size: 1rem;
+}
+.log-form input:focus {
+	outline: none;
+}
+.generic-btn-01 {
+	width: 6rem;
+	height: 1.75rem;
+	letter-spacing: var(--letter-spacing-1);
+	text-transform: uppercase;
+	font-weight: 600;
+	color: var(--color-light-100);
+}
+.small-btn {
+}
+.big-btn {
+	width: 100%;
+	height: 2.5rem;
+}
+.btn-position-top-right {
+	position: absolute;
+	top: 0;
+	top: calc(75px + 1rem);
+	right: 0;
+}
+.secret-btn-1 {
+	position: absolute;
+	right: 0;
+	bottom: -1rem;
+	cursor: pointer;
+}
+.secret-btn-2 {
+	position: absolute;
+	right: 0.5rem;
+	bottom: -1.75rem;
+	cursor: pointer;
+}
+@media (min-width: 800px) {
+	.section-center {
+		width: 85%;
+	}
+}

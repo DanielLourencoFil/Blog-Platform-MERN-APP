@@ -1,0 +1,21 @@
+.categories-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+.categories {
+	display: grid;
+	grid-template-columns: 3fr 2fr;
+	gap: 0.85rem 0;
+	padding: 0 1rem;
+}
+.category {
+	cursor: pointer;
+	color: var(--color-grey-400);
+	will-change: contents;
+	transition: all 0.3s;
+}
+.category:hover {
+	transform: scale(1.1);
+	color: var(--color-grey-500);
+}
