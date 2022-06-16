@@ -1,32 +1,45 @@
 import "./userSettings.css";
-import userPic from "../../assets/user-img-1.png";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FaPlus, FaEye, FaEyeSlash } from "react-icons/fa";
 import { BsPersonCircle } from "react-icons/bs";
 import { useParams } from "react-router-dom";
 import { useUserContext } from "../../context/UserContext";
+import axios from "axios";
 
 function UserSettings() {
 	const userInfoDefault = { username: "", email: "", password: "", img: "" };
 	const { user } = useUserContext();
-	const [updateUserInfo, setUpdateUserInfo] = useState(user);
+	const [userInfo, setUserInfo] = useState(user);
+	const [updateUserInfo, setUpdateUserInfo] = useState({ userId: user._id });
 	const [isSecret, setIsSecret] = useState(true);
-	const { username, email, password, profilePic } = updateUserInfo;
+	const { username, email, password, profilePic } = userInfo;
 
 	const handleUpdateUserInfo = (e) => {
 		setUpdateUserInfo((prev) => {
-			console.log(e.target.value);
+			return { ...prev, [e.target.id]: e.target.value };
+		});
+		setUserInfo((prev) => {
 			return { ...prev, [e.target.id]: e.target.value };
 		});
 	};
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			const res = await axios.put(`/user/${user._id}`, updateUserInfo);
+		} catch (error) {
+			console.log(error);
+		}
 
-	// console.log(updateUserInfo);
+		console.log("btn");
+	};
+
+	console.log(updateUserInfo);
 	const { userId } = useParams();
 	return (
 		<main className="main-section">
 			<div className="section-center update-wrapper">
-				<form className="log-form update-form">
+				<form className="log-form update-form" onSubmit={handleSubmit}>
 					<div className="update-header">
 						<h1 className="update-title">update your account</h1>
 						<button className="update-delete-btn">delete account</button>
@@ -81,7 +94,9 @@ function UserSettings() {
 						onChange={handleUpdateUserInfo}
 						value={password}
 					/>
-					<button className="generic-btn-01 update-btn">update</button>
+					<button type="submit" className="generic-btn-01 update-btn">
+						update
+					</button>
 				</form>
 			</div>
 		</main>

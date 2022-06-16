@@ -7,6 +7,9 @@ const bcrypt = require("bcrypt");
 
 router.put("/:id", async (req, res) => {
 	//verify user auth
+	console.log(req.params.id);
+	console.log(req.body.userId);
+	console.log(req.body);
 	if (req.body.userId === req.params.id) {
 		//verify if password was changed and generate new hash
 		if (req.body.password) {
@@ -23,9 +26,9 @@ router.put("/:id", async (req, res) => {
 				},
 				{ new: true }
 			);
-			res.status(200).json({ msg: "Updaded user!", data: updatedUser });
+			res.status(200).json({ msg: "Updaded user!", payload: updatedUser });
 		} catch (err) {
-			res.status().json({ msg: "Something wrong!", data: err });
+			res.status(404).json({ msg: "Something wrong!", payload: err });
 		}
 	} else {
 		res.status(401).json({ msg: "Can update only your account!" });
@@ -42,7 +45,7 @@ router.delete("/:id", async (req, res) => {
 			await User.findByIdAndDelete(req.params.id);
 			res.status(200).json({ msg: "User account has been deleted !" });
 		} catch (err) {
-			res.status(404).json({ msg: "User was not found!", data: err });
+			res.status(404).json({ msg: "User was not found!", payload: err });
 		}
 	} else {
 		res.status(401).json({ msg: "Can delete only your account!" });

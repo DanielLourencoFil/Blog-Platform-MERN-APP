@@ -8,7 +8,7 @@ import { useUserContext } from "../../context/UserContext";
 
 function Topbar() {
 	const { user, dispatch } = useUserContext();
-	const [userCurrent, setUserCurrent] = useState(user);
+	const [userCurrent, setUserCurrent] = useState(user || {});
 	const [isActive, setIsActive] = useState("");
 	const navigate = useNavigate();
 	const { _id, profilePic } = userCurrent;
