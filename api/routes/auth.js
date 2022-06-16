@@ -14,16 +14,18 @@ router.post("/register", async (req, res) => {
 			email: req.body.email,
 			password: hashedPass,
 		});
-		const user = await newUser.save();
+		let user = await newUser.save();
+		const { password, ...others } = user._doc;
 
-		res.status(200).json(user);
+		res.status(200).json({ msg: "user added to database", payload: others });
 	} catch (err) {
-		res.status(500).json({ msg: "Something wrong", data: err });
+		res.status(500).json({ msg: "Something wrong", payload: err });
 	}
 });
 
 //LOGIN
 router.post("/login", async (req, res) => {
+	console.log(req.body);
 	try {
 		const user = await User.findOne({ username: req.body.username });
 		!user && res.status(400).json({ msg: "Bad credentials!" });
@@ -35,9 +37,11 @@ router.post("/login", async (req, res) => {
 		//returning user info, but not password
 		const { password, ...others } = user._doc;
 
-		res.status(200).json({ msg: "User successfully loged in!", data: others });
+		res
+			.status(200)
+			.json({ msg: "User successfully loged in!", payload: others });
 	} catch (err) {
-		res.status(500).json({ msg: "Something wrong!", data: err });
+		res.status(500).json({ msg: "Something wrong!", payload: err });
 	}
 });
 

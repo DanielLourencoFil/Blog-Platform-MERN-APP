@@ -2,19 +2,34 @@ import "./register.css";
 
 import { useState, useEffect } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Register() {
 	const userInfoDefault = { username: "", email: "", password: "", img: "" };
 	const [newUserInfo, setNewUserInfo] = useState(userInfoDefault);
 	const [isSecret, setIsSecret] = useState(true);
 	const { username, email, password, img } = newUserInfo;
+	const navigate = useNavigate();
 
 	const handleNewUserInfo = (e) => {
 		setNewUserInfo((prev) => {
-			console.log(e.target.value);
 			return { ...prev, [e.target.id]: e.target.value };
 		});
+	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			const res = await axios.post("/auth/register", newUserInfo);
+			const user = await res.data.payload;
+			user && navigate("/login");
+			setNewUserInfo(userInfoDefault);
+
+			// navigate(`/user/update/${user._id}`);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	return (
@@ -26,7 +41,7 @@ function Register() {
 						Login
 					</button>
 				</Link>
-				<form className="log-form login-form">
+				<form className="log-form login-form" onSubmit={handleSubmit}>
 					<label htmlFor="usernam">username</label>
 					<input
 						type="text"
@@ -64,7 +79,7 @@ function Register() {
 						value={password}
 						placeholder="enter your password..."
 					/>
-					<button className="generic-btn-01 register-btn big-btn">
+					<button type="submit" className="generic-btn-01 register-btn big-btn">
 						register
 					</button>
 				</form>

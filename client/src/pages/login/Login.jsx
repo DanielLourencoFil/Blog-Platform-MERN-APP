@@ -1,14 +1,19 @@
 import "./login.css";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useUserContext } from "../../context/UserContext";
+
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function Login() {
-	const userInfoDefault = { username: "", email: "", password: "" };
+	const userInfoDefault = { username: "", password: "" };
 	const [userInfo, setUserInfo] = useState(userInfoDefault);
 	const [isSecret, setIsSecret] = useState(true);
-	const { email, password } = userInfo;
+	const { loading, dispatch } = useUserContext();
+	// console.log(useUserContext());
+	const { username, password } = userInfo;
 
 	const handleUserInfo = (e) => {
 		setUserInfo((prev) => {
@@ -16,7 +21,19 @@ function Login() {
 			return { ...prev, [e.target.id]: e.target.value };
 		});
 	};
-
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		dispatch({ type: "USER_STARTING" });
+		try {
+			const res = await axios.post("/auth/login", userInfo);
+			res && dispatch({ type: "USER_AUTH", payload: res.data.payload });
+			setUserInfo(userInfoDefault);
+		} catch (error) {
+			console.log(error);
+			dispatch({ type: "USER_FAILURE" });
+		}
+	};
+	console.log(loading);
 	return (
 		<main className="main-section register-main">
 			<div className="section-center register-wrapper">
@@ -26,14 +43,14 @@ function Login() {
 						register
 					</button>
 				</Link>
-				<form className="log-form login-form">
-					<label htmlFor="email">email</label>
+				<form className="log-form login-form" onSubmit={handleSubmit}>
+					<label htmlFor="username">username</label>
 					<input
-						type="email"
-						id="email"
-						placeholder="enter your email..."
+						type="text"
+						id="username"
+						placeholder="enter your username..."
 						onChange={handleUserInfo}
-						value={email}
+						value={username}
 					/>
 					<label htmlFor="password">
 						password{" "}
@@ -57,7 +74,13 @@ function Login() {
 						value={password}
 						placeholder="enter your password..."
 					/>
-					<button className="generic-btn-01 login-btn big-btn">login</button>
+					<button
+						type="submit"
+						className="generic-btn-01 login-btn big-btn"
+						disabled={loading}
+					>
+						login
+					</button>
 				</form>
 			</div>
 		</main>

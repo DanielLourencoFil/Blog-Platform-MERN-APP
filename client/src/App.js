@@ -6,29 +6,37 @@ import {
 	WritePost,
 	Register,
 	Login,
-	UpdateUserInfo,
+	UserSettings,
 } from "./pages/pages";
-import ProtectedRoute from "./protetedRoute/ProtectedRoute";
+// import ProtectedRoute from "./protetedRoute/ProtectedRoute";
 
 function App() {
+	const user = false;
 	return (
 		<>
 			<BrowserRouter>
 				<Topbar />
 				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/login" element={<Login />} />
-					<Route path="/register" element={<Register />} />
+					<Route exact path="/" element={<Home />} />
+					<Route path="/login" element={user ? <Home /> : <Login />} />
+					<Route path="/register" element={user ? <Home /> : <Register />} />
 					<Route
-						path="/user/update/:userId"
-						element={
-							<ProtectedRoute>
-								<UpdateUserInfo />
-							</ProtectedRoute>
-						}
+						path="/settings"
+						element={user ? <UserSettings /> : <Register />}
+					/>
+					<Route
+						path="/write/:userId"
+						element={user ? <WritePost /> : <Register />}
 					/>
 					<Route path="/post/:postId" element={<SinglePost />} />
-					<Route path="/write/:userId" element={<WritePost />} />
+					{/* <Route
+						path="/user/settings/:userId"
+						element={
+							<ProtectedRoute>
+								<UserSettings />
+							</ProtectedRoute>
+						}
+					/> */}
 				</Routes>
 			</BrowserRouter>
 		</>

@@ -56,9 +56,9 @@ router.get("/:id", async (req, res) => {
 		const user = await User.findById(req.params.id);
 
 		const { password, ...others } = user._doc;
-		res.status(200).json({ msg: "User found!", data: others });
+		res.status(200).json({ msg: "User found!", payload: others });
 	} catch (err) {
-		res.status(500).json({ msg: "Something went wrong!", data: err });
+		res.status(500).json({ msg: "Something went wrong!", payload: err });
 	}
 });
 module.exports = router;

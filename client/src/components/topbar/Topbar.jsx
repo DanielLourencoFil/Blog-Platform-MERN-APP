@@ -6,6 +6,7 @@ import userImage from "../../assets/user-img-1.png";
 import SocialIcons from "../common/socialIcons/SocialIcons";
 
 function Topbar() {
+	const user = false;
 	const [isActive, setIsActive] = useState("");
 	const navigate = useNavigate();
 	const userId = "daniel";
@@ -51,19 +52,41 @@ function Topbar() {
 						>
 							<li className="top-list-item">WRITE</li>
 						</Link>
-						<Link
-							to="/logout"
-							className={`navlink ${isActive === "logout" ? "active" : ""}`}
-							onClick={() => handleLink("logout")}
-						>
-							<li className="top-list-item">LOGOUT</li>
-						</Link>
+						{user && (
+							<Link
+								to="/"
+								className={`navlink ${isActive === "logout" ? "active" : ""}`}
+								onClick={() => handleLink("logout")}
+							>
+								<li className="top-list-item">LOGOUT</li>
+							</Link>
+						)}
 					</ul>
 				</div>
 				<div className="top-rigth">
-					<Link to={`/user/update/${userId}`}>
-						<img src={userImage} alt="user" className="user-img" />
-					</Link>
+					{user ? (
+						<Link to={`/user/update/${userId}`}>
+							<img src={userImage} alt="user" className="user-img" />
+						</Link>
+					) : (
+						<>
+							<Link
+								to="/register"
+								className={`navlink ${isActive === "register" ? "active" : ""}`}
+								onClick={() => handleLink("register")}
+							>
+								<li className="top-list-item">Register</li>
+							</Link>
+							<Link
+								to="/login"
+								className={`navlink ${isActive === "login" ? "active" : ""}`}
+								onClick={() => handleLink("login")}
+							>
+								<li className="top-list-item">Login</li>
+							</Link>
+						</>
+					)}
+
 					<div className="search-wrapper">
 						{/* <input type="text" className="search-input active" /> */}
 						<FaSearch className="social-icon search-icon" />

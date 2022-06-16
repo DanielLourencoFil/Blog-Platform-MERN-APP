@@ -1,11 +1,11 @@
-import "./updateUserInfo.css";
+import "./userSettings.css";
 import userPic from "../../assets/user-img-1.png";
 
 import { useState, useEffect } from "react";
 import { FaPlus, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 
-function UpdateUserInfo() {
+function UserSettings() {
 	const userInfoDefault = { username: "", email: "", password: "", img: "" };
 	const [updateUserInfo, setUpdateUserInfo] = useState(userInfoDefault);
 	const [isSecret, setIsSecret] = useState(true);
@@ -80,4 +80,4 @@ function UpdateUserInfo() {
 	);
 }
 
-export default UpdateUserInfo;
+export default UserSettings;

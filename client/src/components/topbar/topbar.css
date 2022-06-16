@@ -35,7 +35,9 @@
 .active {
 	border-bottom: 2px solid var(--color-grey-500);
 }
-.top-list li {
+.top-list-item {
+	font-size: 1rem;
+	text-transform: uppercase;
 	margin-top: 0.5rem;
 }
 

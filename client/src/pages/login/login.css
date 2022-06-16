@@ -1,3 +1,7 @@
 .login-btn {
 	background-color: var(--color-alert);
 }
+.login-btn:disabled {
+	cursor: not-allowed;
+	background-color: var(--color-alert-2);
+}
