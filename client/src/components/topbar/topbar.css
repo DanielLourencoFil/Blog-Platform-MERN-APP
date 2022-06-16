@@ -71,6 +71,10 @@
 .search-icon {
 	margin-top: 0.3rem;
 }
+.my-settings {
+	font-size: 1rem;
+	color: var(--color-alert-2);
+}
 /* search input */
 /* .search-wrapper {
 	position: relative;

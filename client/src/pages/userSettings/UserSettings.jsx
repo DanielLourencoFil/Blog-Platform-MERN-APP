@@ -3,13 +3,16 @@ import userPic from "../../assets/user-img-1.png";
 
 import { useState, useEffect } from "react";
 import { FaPlus, FaEye, FaEyeSlash } from "react-icons/fa";
+import { BsPersonCircle } from "react-icons/bs";
 import { useParams } from "react-router-dom";
+import { useUserContext } from "../../context/UserContext";
 
 function UserSettings() {
 	const userInfoDefault = { username: "", email: "", password: "", img: "" };
-	const [updateUserInfo, setUpdateUserInfo] = useState(userInfoDefault);
+	const { user } = useUserContext();
+	const [updateUserInfo, setUpdateUserInfo] = useState(user);
 	const [isSecret, setIsSecret] = useState(true);
-	const { username, email, password, img } = updateUserInfo;
+	const { username, email, password, profilePic } = updateUserInfo;
 
 	const handleUpdateUserInfo = (e) => {
 		setUpdateUserInfo((prev) => {
@@ -31,7 +34,12 @@ function UserSettings() {
 					<div className="update-profile-pic-wrapper">
 						<h2 className="update-profile-pic-title">Profile picture</h2>
 						<div className="pic-input-wrapper">
-							<img src={userPic} alt="" className="profile-pic" />
+							{profilePic ? (
+								<img src={profilePic} alt="" className="profile-pic" />
+							) : (
+								<BsPersonCircle className="profile-icon" />
+							)}
+
 							<label className="profile-upload-btn" htmlFor="img">
 								<FaPlus />
 							</label>
@@ -53,7 +61,7 @@ function UserSettings() {
 						value={email}
 					/>
 					<label htmlFor="password">
-						password{" "}
+						New Password{" "}
 						{isSecret ? (
 							<FaEye
 								className="secret-btn-1"

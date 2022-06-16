@@ -1,5 +1,6 @@
 import { Topbar } from "./components/components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import {
 	Home,
 	SinglePost,
@@ -9,9 +10,10 @@ import {
 	UserSettings,
 } from "./pages/pages";
 // import ProtectedRoute from "./protetedRoute/ProtectedRoute";
+import { useUserContext } from "./context/UserContext";
 
 function App() {
-	const user = false;
+	const { user } = useUserContext();
 	return (
 		<>
 			<BrowserRouter>
@@ -21,7 +23,7 @@ function App() {
 					<Route path="/login" element={user ? <Home /> : <Login />} />
 					<Route path="/register" element={user ? <Home /> : <Register />} />
 					<Route
-						path="/settings"
+						path="/user/settings/:userId"
 						element={user ? <UserSettings /> : <Register />}
 					/>
 					<Route

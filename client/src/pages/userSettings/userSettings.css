@@ -50,7 +50,9 @@
 	object-fit: cover;
 	border-radius: 50%;
 }
-
+.profile-icon {
+	font-size: 3rem;
+}
 .update-btn {
 	align-self: flex-end;
 

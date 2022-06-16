@@ -27,6 +27,7 @@ function Login() {
 		try {
 			const res = await axios.post("/auth/login", userInfo);
 			res && dispatch({ type: "USER_AUTH", payload: res.data.payload });
+			localStorage.setItem("user", JSON.stringify(res.data.payload));
 			setUserInfo(userInfoDefault);
 		} catch (error) {
 			console.log(error);

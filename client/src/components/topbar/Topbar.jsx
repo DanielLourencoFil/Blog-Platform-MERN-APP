@@ -4,17 +4,22 @@ import { NavLink, Link, useNavigate } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import userImage from "../../assets/user-img-1.png";
 import SocialIcons from "../common/socialIcons/SocialIcons";
+import { useUserContext } from "../../context/UserContext";
 
 function Topbar() {
-	const user = false;
+	const { user, dispatch } = useUserContext();
+	const [userCurrent, setUserCurrent] = useState(user);
 	const [isActive, setIsActive] = useState("");
 	const navigate = useNavigate();
-	const userId = "daniel";
+	const { _id, profilePic } = userCurrent;
 
 	const handleLink = (link, e) => {
 		setIsActive(link);
 		navigate("/");
 		console.log(e.currentTarget);
+	};
+	const handleLogout = () => {
+		dispatch({ type: "USER_STARTING" });
 	};
 
 	console.log(isActive);
@@ -46,7 +51,7 @@ function Topbar() {
 							<li className="top-list-item">CONTACT</li>
 						</a>
 						<Link
-							to={`/write/${userId}`}
+							to={`/write/${_id}`}
 							className={`navlink ${isActive === "write" ? "active" : ""}`}
 							onClick={() => handleLink("write")}
 						>
@@ -56,7 +61,7 @@ function Topbar() {
 							<Link
 								to="/"
 								className={`navlink ${isActive === "logout" ? "active" : ""}`}
-								onClick={() => handleLink("logout")}
+								onClick={() => handleLogout()}
 							>
 								<li className="top-list-item">LOGOUT</li>
 							</Link>
@@ -65,8 +70,12 @@ function Topbar() {
 				</div>
 				<div className="top-rigth">
 					{user ? (
-						<Link to={`/user/update/${userId}`}>
-							<img src={userImage} alt="user" className="user-img" />
+						<Link to={`/user/settings/${_id}`}>
+							{profilePic ? (
+								<img src={profilePic} alt="" className="user-img" />
+							) : (
+								<p className="my-settings">My Settings</p>
+							)}
 						</Link>
 					) : (
 						<>
