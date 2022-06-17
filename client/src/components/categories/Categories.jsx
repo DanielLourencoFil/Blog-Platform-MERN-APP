@@ -13,7 +13,7 @@ function Categories() {
 		const fetchPost = async () => {
 			setLoading(true);
 			try {
-				const res = await axios.get(`/category`);
+				const res = await axios.get("/category");
 				setCategories(res.data.payload);
 				setLoading(false);
 			} catch (error) {

@@ -3,13 +3,15 @@ import "./userSettings.css";
 import { useState } from "react";
 import { FaPlus, FaEye, FaEyeSlash } from "react-icons/fa";
 import { BsPersonCircle } from "react-icons/bs";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useUserContext } from "../../context/UserContext";
 import axios from "axios";
 
 function UserSettings() {
 	const userInfoDefault = { username: "", email: "", password: "", img: "" };
-	const { user } = useUserContext();
+	const { user, dispatch } = useUserContext();
+	const navigate = useNavigate();
+
 	const [userInfo, setUserInfo] = useState(user);
 	const [updateUserInfo, setUpdateUserInfo] = useState({ userId: user._id });
 	const [isSecret, setIsSecret] = useState(true);
@@ -30,11 +32,22 @@ function UserSettings() {
 		} catch (error) {
 			console.log(error);
 		}
-
-		console.log("btn");
+	};
+	const handleDelete = async (e) => {
+		e.preventDefault();
+		window.confirm(
+			"Are you sure you want delete your account and all your posts? This action can not be undone!"
+		);
+		try {
+			await axios.delete(`/user/${user._id}`, { data: { userId: user._id } });
+			localStorage.removeItem("user");
+			dispatch({ type: "USER_LOGOUT" });
+			navigate("/");
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
-	console.log(updateUserInfo);
 	const { userId } = useParams();
 	return (
 		<main className="main-section">
@@ -42,7 +55,9 @@ function UserSettings() {
 				<form className="log-form update-form" onSubmit={handleSubmit}>
 					<div className="update-header">
 						<h1 className="update-title">update your account</h1>
-						<button className="update-delete-btn">delete account</button>
+						<button className="update-delete-btn" onClick={handleDelete}>
+							delete account
+						</button>
 					</div>
 					<div className="update-profile-pic-wrapper">
 						<h2 className="update-profile-pic-title">Profile picture</h2>

@@ -9,35 +9,34 @@ function Topbar() {
 	const { user, dispatch } = useUserContext();
 	const searchRef = useRef();
 	const navigate = useNavigate();
-	// const [userCurrent, setUserCurrent] = useState(user || {});
+	const [userCurrent, setUserCurrent] = useState(user || {});
 	const [search, setSearch] = useState("");
 	const [isActive, setIsActive] = useState("");
-	// const { _id, user.profilePic } = userCurrent;
+	const { _id, profilePic } = userCurrent;
 
 	useEffect(() => {
-		// const event = window.addEventListener("click", (e) => {
-		// 	console.log(e.target);
-		// 	console.log(searchRef.current.contains(e.target));
-		// 	if (!searchRef.current.contains(e.target)) {
-		// 		setSearch("");
-		// 	}
-		// });
-		// return () => window.removeEventListener("click", event);
+		const event = window.addEventListener("click", (e) => {
+			console.log(e.target);
+			console.log(searchRef.current.contains(e.target));
+			if (!searchRef.current.contains(e.target)) {
+				setSearch("");
+			}
+		});
+		return () => window.removeEventListener("click", event);
 	}, []);
+
 	const handleLink = (link, e) => {
 		setIsActive(link);
 		navigate("/");
 	};
 	const handleLogout = () => {
-		dispatch({ type: "USER_LOGOUT" });
-		localStorage.removeItem("user");
+		dispatch({ type: "USER_STARTING" });
 	};
 	const handleSearch = (e) => {
 		e.preventDefault();
 		console.log(search);
 		setSearch("");
 	};
-	console.log(user);
 	return (
 		<div className="topbar">
 			<div className="section-center topbar-center">
@@ -53,7 +52,7 @@ function Topbar() {
 						{user && (
 							<>
 								<Link
-									to={`/write/${user._id}`}
+									to={`/write/${_id}`}
 									className={`navlink ${isActive === "write" ? "active" : ""}`}
 									onClick={() => handleLink("write")}
 								>
@@ -79,9 +78,9 @@ function Topbar() {
 				<div className="top-rigth mobile">
 					{user ? (
 						<>
-							<Link to={`/user/settings/${user._id}`}>
-								{user.profilePic ? (
-									<img src={user.profilePic} alt="" className="user-img" />
+							<Link to={`/user/settings/${_id}`}>
+								{profilePic ? (
+									<img src={profilePic} alt="" className="user-img" />
 								) : (
 									<p className="my-settings">My Settings</p>
 								)}

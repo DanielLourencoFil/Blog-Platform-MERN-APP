@@ -38,6 +38,8 @@ router.put("/:id", async (req, res) => {
 //DELETE
 router.delete("/:id", async (req, res) => {
 	//verify user auth
+	console.log("oi", req.body);
+	console.log(req.params.id);
 	if (req.body.userId === req.params.id) {
 		try {
 			const user = await User.findById(req.params.id);

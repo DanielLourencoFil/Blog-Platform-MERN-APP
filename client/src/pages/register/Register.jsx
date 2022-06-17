@@ -9,7 +9,7 @@ function Register() {
 	const userInfoDefault = { username: "", email: "", password: "", img: "" };
 	const [newUserInfo, setNewUserInfo] = useState(userInfoDefault);
 	const [isSecret, setIsSecret] = useState(true);
-	const { username, email, password, img } = newUserInfo;
+	const { username, email, password } = newUserInfo;
 	const navigate = useNavigate();
 
 	const handleNewUserInfo = (e) => {
@@ -25,8 +25,6 @@ function Register() {
 			const user = await res.data.payload;
 			user && navigate("/login");
 			setNewUserInfo(userInfoDefault);
-
-			// navigate(`/user/update/${user._id}`);
 		} catch (error) {
 			console.log(error);
 		}

@@ -5,6 +5,10 @@ import image from "../../assets/greece-by-constantinos-kollias.jpg";
 import React from "react";
 
 function WritePost() {
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		console.log("btn");
+	};
 	return (
 		<main className="main-section">
 			<form className="section-center write-wrapper">
@@ -28,7 +32,9 @@ function WritePost() {
 						className="write-text-input write-input"
 					></textarea>
 				</div>
-				<button className="write-submit-btn">Publish</button>
+				<button className="write-submit-btn" onClick={handleSubmit}>
+					Publish
+				</button>
 			</form>
 		</main>
 	);

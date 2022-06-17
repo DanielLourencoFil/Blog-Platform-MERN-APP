@@ -14,6 +14,11 @@ function UserContextProvider({ children }) {
 	const values = { ...state, dispatch };
 	console.log(state);
 
+	useEffect(() => {
+		JSON.parse(localStorage.getItem("user"));
+		localStorage.setItem("user", JSON.stringify(state.user));
+	}, [state.user]);
+
 	return (
 		<UserContext.Provider value={{ ...values }}>
 			{children}

@@ -14,12 +14,15 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	gap: 1rem;
+	background-color: aqua;
 }
 .top-list {
 	height: 100%;
 	display: flex;
-	gap: 1rem;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 1.2rem;
 	color: var(--color-grey-400);
 }
 
@@ -34,10 +37,25 @@
 	border-bottom: 2px solid var(--color-grey-500);
 }
 .top-list-item {
-	font-size: clamp(0.8rem, 3vw, 1rem);
+	font-size: 1rem;
 	text-transform: uppercase;
+	margin-top: 0.5rem;
 }
 
+.top-rigth {
+	height: 100%;
+	display: flex;
+	align-self: flex-end;
+	align-items: center;
+	justify-content: flex-end;
+	font-size: 1.35rem;
+	gap: 1rem;
+	cursor: pointer;
+}
+.burguer-icon {
+	font-size: 1.2rem;
+	cursor: pointer;
+}
 .social-icon {
 	transition: transform 0.3s;
 }
@@ -58,59 +76,42 @@
 	object-position: center;
 }
 .search-wrapper {
-	width: 60%;
 	display: flex;
 	align-items: center;
 }
 .search-icon {
-	font-size: 1.2rem;
-	color: var(--color-grey-400);
-	cursor: pointer;
-}
-.top-rigth {
-	display: flex;
-	flex-direction: column;
+	margin-top: 0.3rem;
 }
 .my-settings {
 	font-size: 1rem;
 	color: var(--color-alert-2);
 }
 /* search input */
+/* .search-wrapper {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+}
 .search-input {
-	width: 100%;
-	outline: none;
-	font-size: 1rem;
-	border: none;
-	border-bottom: 1px dotted var(--color-grey-400);
-
-	border-radius: 0;
+	position: absolute;
+	right: 0;
+	top: 25px;
+	border: 1px solid transparent;
+	border-radius: var(--radius-1);
 	margin-right: 0.25rem;
 }
 .search-input.active {
 	border: 1px solid var(--color-grey-400);
 	border-radius: var(-radius-1);
-}
+} */
 .mobile {
 	display: none;
 }
-
 @media (min-width: 650px) {
-	.top-rigth {
-		height: 100%;
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		justify-content: center;
-		gap: 1rem;
-		/* cursor: pointer; */
+	.mobile {
+		display: block;
 	}
-	.top-list {
-		flex-direction: row;
-		align-items: center;
-		justify-content: center;
-		gap: 1.2rem;
-	}
-	.search-wrapper {
-		width: 40%;
+	.desktop {
+		display: none;
 	}
 }
