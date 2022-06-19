@@ -126,8 +126,7 @@ label {
 	font-weight: 600;
 	color: var(--color-light-100);
 }
-.small-btn {
-}
+
 .big-btn {
 	width: 100%;
 	height: 2.5rem;

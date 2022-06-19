@@ -1,3 +1,6 @@
+.write-wrapper {
+	margin-top: 3rem;
+}
 .write-input {
 	border: 1px solid transparent;
 	outline: none;

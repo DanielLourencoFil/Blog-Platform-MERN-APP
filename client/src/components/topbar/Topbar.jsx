@@ -37,7 +37,6 @@ function Topbar() {
 		console.log(search);
 		setSearch("");
 	};
-	console.log(user);
 	return (
 		<div className="topbar">
 			<div className="section-center topbar-center">

@@ -4,6 +4,7 @@ const Post = require("../models/Post");
 
 //CREATE
 router.post("/", async (req, res) => {
+	console.log(req.body);
 	const newPost = new Post(req.body);
 	try {
 		// const newPost = await new Post(req.body).save();
@@ -19,6 +20,7 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
 	try {
 		const post = await Post.findById(req.params.id);
+
 		if (post.username === req.body.username) {
 			try {
 				const updatedPost = await Post.findByIdAndUpdate(
@@ -37,11 +39,11 @@ router.put("/:id", async (req, res) => {
 		res.status(500).json({ msg: "Something went wrong!", payload: err });
 	}
 
-	res.status(200).json({ msg: "Post updated!" });
-	try {
-	} catch (error) {
-		res.status(500).json({ msg: "Something went wrong!", payload: err });
-	}
+	// res.status(200).json({ msg: "Post updated!" });
+	// try {
+	// } catch (error) {
+	// 	res.status(500).json({ msg: "Something went wrong!", payload: err });
+	// }
 });
 
 //GET ALL
@@ -71,7 +73,6 @@ router.get("/", async (req, res) => {
 //GET SINGLE
 router.get("/:id", async (req, res) => {
 	try {
-		console.log(req.params);
 		const post = await Post.findById(req.params.id);
 		res.status(200).json({ msg: "success", payload: post });
 	} catch (error) {
@@ -82,6 +83,8 @@ router.get("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
 	try {
 		const post = await Post.findById(req.params.id);
+		console.log(post.username === req.body.username, "oi");
+
 		if (post.username === req.body.username) {
 			try {
 				await post.delete();

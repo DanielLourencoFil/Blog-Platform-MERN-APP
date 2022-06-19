@@ -12,7 +12,6 @@ const UserContext = createContext(INITIAL_STATE);
 function UserContextProvider({ children }) {
 	const [state, dispatch] = useReducer(UserReducer, INITIAL_STATE);
 	const values = { ...state, dispatch };
-	console.log(state);
 
 	useEffect(() => {
 		JSON.parse(localStorage.getItem("user"));
